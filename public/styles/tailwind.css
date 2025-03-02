@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+@theme {
+    --font-display : "Poppins", serif;
+    --font-light : "Scope One", serif;
+}
