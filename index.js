@@ -9,7 +9,7 @@ const port = process.env.PORT
 const path = require("path")
 
 app.use(cors({
-    origin : "http://localhost:5173"
+    origin : "https://fashion-ecommerce-frontend.vercel.app"
 }))
 
 
