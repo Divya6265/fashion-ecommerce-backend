@@ -1,89 +1,96 @@
 <link rel="stylesheet" href="/styles/styles.css">
 
-<div class=" font-sans w-fit m-auto  my-5">
-    <h1 class="text-center  text-4xl  md:text-3xl py-2 font-bold text-gray-500 ">Add Product</h1>
-    <form action="/addProduct" method="post" class="flex justify-center flex-wrap py-5 w-full md:w-200 gap-2 ">
-        <input type="text" name="name" id="name" class="px-2 py-1 w-5/10 outline-0 border-2 border-gray-500/20 rounded "
-            placeholder="Enter Name" required>
-        <input type="text" name="price" id="price" class="px-2 py-1 w-4/10 outline-0 border-2 border-gray-500/20 rounded"
-            placeholder="Enter Price" required>
-        <input type="text" name="image" id="image" class="px-2 py-1 w-4/10 outline-0 border-2 border-gray-500/20 rounded"
-            placeholder="Enter Image URL" required>
-        <input type="text" name="description" class="px-2 py-1 w-5/10 outline-0 border-2 border-gray-500/20 rounded"
-            id="description" placeholder="Enter Description" required>
 
-        <select name="category" id="category" class="px-2 py-1 w-3/10 outline-0 border-2 border-gray-500/20 rounded"
-            required>
-            <option value="Men">Men</option>
-            <option value="Women">Women</option>
-        </select>
 
-        <button class="p-2 outline-0 bg-gray-500/20 rounded w-6/10 font-bold text-gray-500 hover:cursor-pointer ">Add Product</button>
-    </form>
-
-</div>
-<div class=" border-gray-500/20 border-2 rounded overflow-y-scroll  w-full md:w-200 max-h-200 h-fit m-auto">
-    <% for(let product of products) { %>
-        <div class="flex flex-row justify-between items-center border-b-1 border-gray-500/20 ">
-            <img src="<%= product.image %>" alt="" class="object-cover w-50">
-            <div class="flex flex-col flex-grow-1 w-fit">
-                <span class="text-2xl mb-2 w-4/5">
-                    <%= product.name %>
-                </span>
-                <span class="flex flex-row justify-between ">
-                    <span>
-                        <p>Price: <%= product.price %></p>
-                        <p>Category: <%= product.category %> </p>
-                    </span>
-                    <span>
-                        <a href="/deleteProduct/<%= product.id %>" class="hover:cursor-pointer">delete</a>
-                        <a href="/?id=<%= product.id %>" class="hover:cursor-pointer">update</a>
-                        <!-- <p onclick="handleUpdate()" class="hover:cursor-pointer">update</p> -->
-                    </span>
-                </span>
-    
-            </div>
-        </div>
-        
-        <% } %>
-        
-        <% if(product?.id) {%>
-        
-        <div class=" block absolute z-50 top-0 left-0 bottom-0 right-0 pt-10 w-full h-full bg-black/20" id="updateform">
-            
-            <form action="/updateProduct" method="post"  class="m-auto mt-20 flex flex-col gap-2  bg-white rounded p-4 w-full md:w-100 ">
-                <h1 class="text-center  text-4xl  md:text-3xl pt-2 font-bold text-gray-500 ">Update Product</h1>
-                       <label for="name" class="text-left">Name</label>
-                       <input type="text" name="name" id="name" placeholder="Enter Name" value="<%= product?.name%>" class="px-2 py-1 w-full outline-0 border-2 border-gray-500 rounded" required>
-                       <label for="name">Price</label>
-                       <input type="text" name="price" id="price" placeholder="Enter Price" value="<%= product?.price%>" class="px-2 py-1 w-full outline-0 border-2 border-gray-500 rounded" required>
-                       <label for="name">Image URL</label>
-                       <input type="text" name="image" id="image" placeholder="Enter Image URL" value="<%= product?.image%>" class="px-2 py-1 w-full outline-0 border-2 border-gray-500 rounded" required>
-                       <input type="hidden" name="id" id="id" value="<%= product?.id %>">
-                       <label for="name">Category</label>
-                       <select name="category" id="category" class="px-2 py-1 w-full outline-0 border-2 border-gray-500 rounded" required>
-                           <option value="<%= product?.category %>">
-                               <%= product?.category %>
-                           </option>
-                           <option value="Men">Men</option>
-                           <option value="Women">Women</option>
-                       </select>
-                       
-                       <label for="name">Description</label>
-                       <input type="text" name="description" id="description" placeholder="Enter Description"
-                           value="<%= product?.description %>" class="px-2 py-1 w-full outline-0 border-2 border-gray-500 rounded" required>
-                      <span class="flex  justify-between">
-                       <a href="/" type="button" class="p-2 outline-0 bg-gray-500 rounded w-2/5 font-bold text-white" >Cancle</a>
-                       <button class="p-2 outline-0 bg-gray-500 rounded w-2/5 font-bold text-white " >Update Product</button>
-                      </span>
-                   </form>
-       
-        </div> 
-        <% } %>
-        
-        
+<div class="flex md:flex-row h-screen">
    
+    <div class=" border-gray-500/20 border-2 rounded overflow-scroll  w-full md:w-200 h-50  m-auto">
+        <% for(let product of products) { %>
+            <div class="flex flex-row justify-between items-center border-b-1 border-gray-500/20 ">
+                <img src="<%= product.image %>" alt="" class="object-cover w-50">
+                <div class="flex flex-col flex-grow-1 w-fit">
+                    <span class="text-2xl mb-2 w-4/5">
+                        <%= product.name %>
+                    </span>
+                    <span class="flex flex-row justify-between ">
+                        <span>
+                            <p>Price: <%= product.price %></p>
+                            <p>Category: <%= product.category %> </p>
+                        </span>
+                        <span>
+                            <a href="/deleteProduct/<%= product.id %>" class="hover:cursor-pointer">delete</a>
+                            <a href="/?id=<%= product.id %>" class="hover:cursor-pointer">update</a>
+                            <!-- <p onclick="handleUpdate()" class="hover:cursor-pointer">update</p> -->
+                        </span>
+                    </span>
+        
+                </div>
+            </div>
+            
+            <% } %>
+            
+       
+    </div>
+    <div class=" font-sans w-100 m-auto   my-5">
+        <h1 class="text-center  text-4xl  md:text-3xl py-2 font-bold text-gray-500 ">Add Product</h1>
+        <form action="/addProduct" method="post" class="flex justify-center flex-col  py-5 w-full gap-2 ">
+            <input type="text" name="name" id="name" class="px-2 py-1 w-full outline-0 border-2 border-gray-500/20 rounded "
+                placeholder="Enter Name" required>
+            <input type="text" name="price" id="price" class="px-2 py-1 outline-0 border-2 border-gray-500/20 rounded"
+                placeholder="Enter Price" required>
+            <input type="text" name="image" id="image" class="px-2 py-1 outline-0 border-2 border-gray-500/20 rounded"
+                placeholder="Enter Image URL" required>
+            <input type="text" name="description" class="px-2 py-1 outline-0 border-2 border-gray-500/20 rounded"
+                id="description" placeholder="Enter Description" required>
+    
+            <select name="category" id="category" class="px-2 py-1 outline-0 border-2 border-gray-500/20 rounded"
+                required>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+            </select>
+    
+            <button class="p-2 outline-0 bg-gray-500/20 rounded font-bold text-gray-500 hover:cursor-pointer ">Add Product</button>
+        </form>
+    
+    </div>
 </div>
+
+
+<% if(product?.id) {%>
+        
+    <div class=" block absolute z-50 top-0 left-0 bottom-0 right-0 pt-10 w-full h-full bg-black/20" id="updateform">
+        
+        <form action="/updateProduct" method="post"  class="m-auto mt-20 flex flex-col gap-2  bg-white rounded p-4 w-full md:w-100 ">
+            <h1 class="text-center  text-4xl  md:text-3xl pt-2 font-bold text-gray-500 ">Update Product</h1>
+                   <label for="name" class="text-left">Name</label>
+                   <input type="text" name="name" id="name" placeholder="Enter Name" value="<%= product?.name%>" class="px-2 py-1 w-full outline-0 border-2 border-gray-500 rounded" required>
+                   <label for="name">Price</label>
+                   <input type="text" name="price" id="price" placeholder="Enter Price" value="<%= product?.price%>" class="px-2 py-1 w-full outline-0 border-2 border-gray-500 rounded" required>
+                   <label for="name">Image URL</label>
+                   <input type="text" name="image" id="image" placeholder="Enter Image URL" value="<%= product?.image%>" class="px-2 py-1 w-full outline-0 border-2 border-gray-500 rounded" required>
+                   <input type="hidden" name="id" id="id" value="<%= product?.id %>">
+                   <label for="name">Category</label>
+                   <select name="category" id="category" class="px-2 py-1 w-full outline-0 border-2 border-gray-500 rounded" required>
+                       <option value="<%= product?.category %>">
+                           <%= product?.category %>
+                       </option>
+                       <option value="Men">Men</option>
+                       <option value="Women">Women</option>
+                   </select>
+                   
+                   <label for="name">Description</label>
+                   <input type="text" name="description" id="description" placeholder="Enter Description"
+                       value="<%= product?.description %>" class="px-2 py-1 w-full outline-0 border-2 border-gray-500 rounded" required>
+                  <span class="flex  justify-between">
+                   <a href="/" type="button" class="p-2 outline-0 bg-gray-500 rounded w-2/5 font-bold text-white" >Cancle</a>
+                   <button class="p-2 outline-0 bg-gray-500 rounded w-2/5 font-bold text-white " >Update Product</button>
+                  </span>
+               </form>
+   
+    </div> 
+    <% } %>
+    
+    
 
 <script>
     function handleUpdateClose(){
