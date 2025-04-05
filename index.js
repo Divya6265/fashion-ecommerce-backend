@@ -8,10 +8,7 @@ const cors = require('cors')
 const port = process.env.PORT
 const path = require("path")
 
-app.use(cors({
-    // origin : "https://fashion-ecommerce-frontend.vercel.app"
-    origin : process.env.url
-}))
+app.use(cors())
 
 
 app.set("view engine", "ejs")
